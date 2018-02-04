@@ -1,0 +1,56 @@
+<div class="container">
+<ul class="back-n-music">
+    <li><span class="section-title">Backgrounds</span>
+        <ul>
+            <li (click)="changeBackground('forest')" [ngClass]="isSelectedBackground('forest')">Forest</li>
+            <li (click)="changeBackground('city')" [ngClass]="isSelectedBackground('city')">City</li>
+            <li (click)="changeBackground('dangeoun')" [ngClass]="isSelectedBackground('dangeoun')">Dangeoun</li>   
+            <li (click)="changeBackground('room')" [ngClass]="isSelectedBackground('room')">Room</li>       
+            <li (click)="changeBackground('battle')" [ngClass]="isSelectedBackground('battle')">Battle</li>
+        </ul>
+    </li>
+    <li><span class="section-title">Music</span>
+        <ul>
+            <li (click)="changeMusic('adventure')" [ngClass]="isSelectedMusic('adventure')">Adventure</li>
+            <li (click)="changeMusic('mistery')"  [ngClass]="isSelectedMusic('mistery')">Mistery</li>
+            <li (click)="changeMusic('battle')" [ngClass]="isSelectedMusic('battle')">Battle</li>        
+       </ul>
+    </li>
+    <li>
+        <button>Add Character</button>
+    </li>
+</ul>
+<div class="list-of-characters">
+   <ul>
+       <li>
+           <div class="character">
+              
+           </div>
+       </li>
+   </ul>
+</div>
+<div class="characters-selector">
+     <ul>
+       <li *ngFor="let character of appCharacters">
+           <div class="character">
+                <img [src]="picturePath + character.name" alt="" class="photo">
+                <span class="name">
+                    <strong>
+                        {{character.name}}
+                    </strong>
+                </span>
+                <span id="ac">
+                    <strong>AC:</strong> 
+                    {{character.ac}}
+                </span>
+                <span id="hp">
+                    <strong>HP</strong>
+                    {{character.hp}}
+                </span>
+           </div>
+       </li>
+   </ul>
+</div>
+<button (click)="changeSettings()" class="left-button">Set Settings</button>
+<button (click)="resetSettings()" class="right-button">Reset All</button>
+</div>

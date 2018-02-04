@@ -1,0 +1,99 @@
+.container {
+    display: grid;
+    grid-template-columns: [col-start] 50% [col-end] 50%;
+    grid-template-rows: [row-1] 300px [row-2] 570px [row-3] 20px;
+}
+
+li {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+.selected {
+    background-color: black;
+    color: white;
+    font-size: 25px;
+}
+
+.not-selected {
+    background-color: lightgray;
+    color: gray;
+    font-size:20px;
+}
+
+.section-title {
+    background-color: darkred;
+    font-size: 25px;
+    padding: 5px;
+    color: wheat;
+}
+
+li ul {
+    margin: 10px;
+}
+ 
+.left-button {
+    grid-column-start: col-start;
+    grid-column-end: col-start;
+    grid-row-start: row-3;
+}
+
+.right-button {
+    grid-column-start: col-end;
+    grid-column-end: col-end;
+    grid-row-start: row-3;
+}
+
+.list-of-characters {
+    grid-column-start: col-start;
+    grid-column-end: col-start;
+    grid-row-start: row-2;
+    grid-row-end: row-2;    
+    padding: 3em;
+    overflow-y: auto;
+}
+
+.characters-selector {
+    grid-column-start: col-end;
+    grid-column-end: col-end;
+    grid-row-start: row-1;
+    grid-row-end: row-2;
+    padding: 3em;
+    overflow-y: auto;
+}
+
+.back-n-music {
+    grid-column-start: col-start;
+}
+
+.character {
+    display: grid;
+    grid-template-columns: [col-photo] 100px [col-info] 300px;
+    grid-template-rows: [row-name] 50px [row-ac] 25px [row-hp] 25px;
+}
+
+.photo {
+    height: 100px;
+    width: 100px;
+}
+
+.name {
+    background-color: bisque;
+    color: darkred;
+    font-size: 18px;
+    font-style: oblique;
+    padding: 1em
+}
+
+#ac {
+    grid-row-start: row-ac;
+    grid-column-start: col-info;
+}
+
+#hp {
+    grid-row-start: row-hp;
+    grid-column-start: col-info;
+}
