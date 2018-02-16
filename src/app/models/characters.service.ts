@@ -13,11 +13,17 @@ export class CharactersService {
   characterList = this.charactersSubject.asObservable();
 
   getCharacters() {
-    console.log(environment.apiUrl);
       return this.http.get
         (
           environment.apiUrl + 'characters'
         );
+  }
+
+  saveCharacter(newCharacter) {
+    return this.http.post(
+      environment.apiUrl + 'character',
+      newCharacter
+    ).toPromise();
   }
 
 }

@@ -27,6 +27,7 @@ export class ControllerComponent implements OnInit {
   ngOnInit() {
     this.resetSettings();
     this.appCharacters = [];
+    this.settings.characters = [];
   }
 
   resetSettings() {
@@ -40,7 +41,7 @@ export class ControllerComponent implements OnInit {
   }
 
   changeSettings() {
-    this.viewSettings.changeSettings(this.settings.background, this.settings.music, ['monster1', 'monster2', 'monster3']);
+    this.viewSettings.changeSettings(this.settings.background, this.settings.music, this.settings.characters);
     //this.resetSettings();
   }
 
@@ -64,4 +65,15 @@ export class ControllerComponent implements OnInit {
     return 'not-selected'; 
   }
 
+  addCharacter(id) {
+    this.appCharacters.forEach(element => {
+      if (element._id === id) this.settings.characters.push(element);      
+    });
+  }
+
+  removeCharacter(i) {
+    console.log(i);
+    this.settings.characters.splice(i, 1);
+  }
 }
+

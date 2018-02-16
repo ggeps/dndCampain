@@ -2,15 +2,20 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CampainComponent } from './views/campain/campain.component';
 import { ControllerComponent } from './views/controller/controller.component';
+import { AddCharactersComponent } from './views/add-characters/add-characters.component';
 
 const routes: Routes = [
   {
-    path: 'cc',
+    path: '',
     component: CampainComponent
   },
   {
-    path: '',
+    path: 'dm',
     component: ControllerComponent
+  },
+  {
+    path: 'addCharacter',
+    component: AddCharactersComponent
   }
 ];
 

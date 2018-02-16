@@ -3,8 +3,32 @@
     width:  100%;
     top: 0em;
     left: 0em;
+    position: absolute;
+    z-index: -1;
 }
 
 video {
     display: none;
 }
+
+.characters {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    flex-flow: row wrap;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.character {
+    height: auto;
+    width: auto;
+}
+

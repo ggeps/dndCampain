@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 export class CampainComponent implements OnInit {
   backgroundUrl: string = environment.apiUrl + 'background/';
   musicUrl: string = environment.apiUrl + 'music/';
+  imagesUrl: string = environment.apiUrl + 'character/picture/';
   settings;
 
   constructor(private viewSettings: ViewSettingsService) { 
@@ -17,6 +18,7 @@ export class CampainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.settings.characters = [];
   }
 
   audioEnded() {

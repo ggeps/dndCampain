@@ -7,6 +7,8 @@
             <li (click)="changeBackground('dangeoun')" [ngClass]="isSelectedBackground('dangeoun')">Dangeoun</li>   
             <li (click)="changeBackground('room')" [ngClass]="isSelectedBackground('room')">Room</li>       
             <li (click)="changeBackground('battle')" [ngClass]="isSelectedBackground('battle')">Battle</li>
+            <li (click)="changeBackground('desert')" [ngClass]="isSelectedBackground('desert')">Desert</li>
+            <li (click)="changeBackground('darkForest')" [ngClass]="isSelectedBackground('darkForest')">darkForest</li>
         </ul>
     </li>
     <li><span class="section-title">Music</span>
@@ -22,9 +24,22 @@
 </ul>
 <div class="list-of-characters">
    <ul>
-       <li>
-           <div class="character">
-              
+       <li *ngFor="let character of settings.characters; let i = index">
+           <div class="character" (dblclick)="removeCharacter(i)">
+                <img [src]="picturePath + character.name" alt="" class="photo">
+                <span class="name">
+                    <strong>
+                        {{character.name}}
+                    </strong>
+                </span>
+                <span id="ac">
+                    <strong>AC:</strong> 
+                    {{character.ac}}
+                </span>
+                <span id="hp">
+                    <strong>HP</strong>
+                    {{character.hp}}
+                </span>
            </div>
        </li>
    </ul>
@@ -32,7 +47,7 @@
 <div class="characters-selector">
      <ul>
        <li *ngFor="let character of appCharacters">
-           <div class="character">
+           <div class="character" (dblclick)="addCharacter(character._id)">
                 <img [src]="picturePath + character.name" alt="" class="photo">
                 <span class="name">
                     <strong>
