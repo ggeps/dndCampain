@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http'
 import { HttpModule } from '@angular/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { AddCharactersComponent } from './views/add-characters/add-characters.component';
+import { GridComponent } from './views/grid/grid.component';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
+import { GridModelService } from './models/grid-model.service';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -23,18 +26,23 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AppComponent,
     CampainComponent,
     ControllerComponent,
-    AddCharactersComponent
+    AddCharactersComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SocketIoModule.forRoot(config),
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2DragDropModule.forRoot()
   ],
   providers: [
     ViewSettingsService,
-    CharactersService
+    CharactersService,
+    GridModelService
+  
+    
   ],
   bootstrap: [AppComponent]
 })

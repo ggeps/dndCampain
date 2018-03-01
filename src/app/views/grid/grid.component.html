@@ -1,0 +1,19 @@
+<div class="container">
+  <table>
+    <tr>
+      <td class="info"></td>
+      <td class="info" *ngFor="let column of columns">
+        {{ column }}
+      </td>
+    </tr>
+    <tr *ngFor="let row of rows">
+      <td class="info"> 
+        {{ row }}
+      </td>
+      <td *ngFor="let column of columns" droppable (onDrop)="moveToken($event)">
+        <div draggable [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="addToken($event)" class="token">
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

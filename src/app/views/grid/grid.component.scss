@@ -1,0 +1,88 @@
+body {
+    overflow: hidden !important;
+}
+
+.container {
+    position: absolute;
+    background-color: rgba(200, 200, 200, 0.6);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;    
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 80%;
+    height: 90%;
+    position: relative;
+}
+
+th, td {
+    border: 5px solid black;
+}
+
+td {
+    text-align: center;
+    font-size:40px;
+    font-style: bold;
+}
+
+.info {
+    border: none;
+}
+
+.token {
+    height: 80%;
+    width: 80%;
+    margin: 10%;
+    border-radius: 80px;
+    cursor: pointer;
+}
+
+
+img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -5;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.green-yellow {
+    background-color: greenyellow;
+}
+
+.brown {
+    background-color: brown;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.pink {
+    background-color: pink;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
+}
