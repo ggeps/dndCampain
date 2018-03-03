@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { GridModelService } from '../../models/grid-model.service';
 
 @Component({
@@ -12,8 +12,9 @@ export class GridComponent implements OnInit {
   private gridSize = {};
   private rows = [];
   private columns = [];
-  private grid = [];
+  private grid = {};
   private alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  private originNode;
 
   constructor(private gridModel: GridModelService) {
       this.gridModel.gridSize.subscribe(data => this.gridSize=data);
@@ -31,12 +32,8 @@ export class GridComponent implements OnInit {
 
       rows.forEach(function(row) {
         columns.forEach(function(column) {
-            grid
-            .push({
-              name: column + row,
-              active: false,
-              color: 'blank'
-            });
+            grid[column+row] = {active: false,
+              color: 'blank'};
         });
       });
    }
@@ -46,38 +43,32 @@ export class GridComponent implements OnInit {
 
 
   moveToken(e: any) {
-    let target = e.nativeEvent.target;
-    console.log(e.nativeEvent);
-    var grid = this.grid;
-    grid.forEach(function(originCell) {
-      if (originCell.name === e.dragData.name) {
-        grid.forEach(function(targetCell) {
-          if(targetCell.name === target.id && !targetCell.active) {
-            targetCell.color = originCell.color;
-            targetCell.active = true;
-            originCell.color = 'blank';
-            originCell.active = false;
-            console.log(originCell.name);
-            let origin: HTMLElement = document.getElementById(originCell.name);
-            console.log(origin);
-          }
-        });
-      }
-    });
+    let targetNode = e.nativeEvent.target;
+    let originNode = this.originNode;
+    if (!this.grid[targetNode.id].active) {
+      targetNode.classList.add(this.grid[originNode.id].color);
+      originNode.classList.remove(this.grid[originNode.id].color);
+      this.grid[originNode.id].color = 'blank';
+      this.grid[originNode.id].active = false;
+      this.grid[targetNode.id].color = 'blue';
+      this.grid[targetNode.id].active = true;
+    }
+  }
+
+  storeOrigin(e: any){
+    this.originNode = e.target;
   }
 
   addToken(e: any) {
-    this.grid.forEach(function(cell) {
-      if (cell.name === e.target.id && !cell.active) {
-        cell.color = 'blue';
-        cell.active = true;
-        e.target.classList.add(cell.color);
-      } else if (cell.name === e.target.id && cell.active ) {
-        e.target.classList.remove(cell.color);
-        cell.color = 'blank';
-        cell.active = false;
+
+      if (!this.grid[e.target.id].active) {
+        this.grid[e.target.id].color = 'blue';
+        this.grid[e.target.id].active = true;
+        e.target.classList.add(this.grid[e.target.id].color);
+      } else if (this.grid[e.target.id].active ) {
+        e.target.classList.remove(this.grid[e.target.id].color);
+        this.grid[e.target.id].color = 'blank';
+        this.grid[e.target.id].active = false;
       }
-    });
   }
-  
 }

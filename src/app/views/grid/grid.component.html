@@ -11,7 +11,7 @@
         {{ row }}
       </td>
       <td *ngFor="let column of columns" droppable (onDrop)="moveToken($event)">
-        <div draggable [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="addToken($event)" class="token">
+        <div draggable (onDragStart)="storeOrigin($event)"  [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="addToken($event)" class="token">
         </div>
       </td>
     </tr>
