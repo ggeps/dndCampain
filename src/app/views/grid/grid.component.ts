@@ -12,7 +12,7 @@ export class GridComponent implements OnInit {
   private gridSize = {};
   private rows = [];
   private columns = [];
-  private grid = {};
+  private grid = [];
   private alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   private originNode;
 
@@ -55,7 +55,7 @@ export class GridComponent implements OnInit {
     }
   }
 
-  storeOrigin(e: any){
+  storeOrigin(e: any) {
     this.originNode = e.target;
   }
 
