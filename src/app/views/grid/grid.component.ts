@@ -32,8 +32,10 @@ export class GridComponent implements OnInit {
 
       rows.forEach(function(row) {
         columns.forEach(function(column) {
-            grid[column+row] = {active: false,
-              color: 'blank'};
+            grid[column + row] = {
+              active: false,
+              color: 'blank'
+            };
         });
       });
    }
@@ -65,7 +67,7 @@ export class GridComponent implements OnInit {
         this.grid[e.target.id].color = 'blue';
         this.grid[e.target.id].active = true;
         e.target.classList.add(this.grid[e.target.id].color);
-      } else if (this.grid[e.target.id].active ) {
+      } else if (this.grid[e.target.id].active) {
         e.target.classList.remove(this.grid[e.target.id].color);
         this.grid[e.target.id].color = 'blank';
         this.grid[e.target.id].active = false;
