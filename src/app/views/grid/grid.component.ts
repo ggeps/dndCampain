@@ -105,12 +105,13 @@ export class GridComponent implements AfterViewInit {
     this.addTokenElement.nativeElement.classList.add('visible');
   }
 
-  onRightClick(id) {
+  removeToken(id) {
     let node = this.grid[id];
     node.name = null;
     node.hp = null;
     node.color = 'blank';
     node.size = 1;
+    node.active = false;
     return false
   }
 
