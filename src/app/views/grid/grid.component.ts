@@ -21,7 +21,7 @@ export class GridComponent implements AfterViewInit {
     color: 'blue',
     hp: null,
     name: null,
-    size: 3
+    size: null
   };
 
   constructor(private gridModel: GridModelService) {

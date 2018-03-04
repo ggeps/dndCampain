@@ -32,11 +32,12 @@
       <label for="hp">Hit Points:</label>
       <input type="text" id="hp" name="hp"  [(ngModel)]="newToken.hp">
       <label for="size">Size:</label>
-      <select [(ngModel)]="newToken.size" id="">
+      <select [(ngModel)]="newToken.size" id="size" name="size">
         <option value="1">Small to Medium</option>
         <option value="2">Large</option>
         <option value="3">Huge</option>
-        <option value="4">Gigantic</option>
+        <option value="4">Gargantuan</option>
+        <option value="5">Colossal</option>
       </select>
     </form>  
   <div id="colors">
@@ -46,11 +47,11 @@
     </div>
     <div (click)="setColor('red')" [ngClass]="isSelectedColor('red')">
       <div class="color red"></div>
-      <span><strong>Blue</strong></span>
+      <span><strong>Red</strong></span>
     </div>
     <div (click)="setColor('blue')" [ngClass]="isSelectedColor('blue')">
       <div class="color blue"></div>
-      <span><strong>Red</strong></span>
+      <span><strong>Blue</strong></span>
     </div>
     <div (click)="setColor('green')" [ngClass]="isSelectedColor('green')">
       <div class="color green"></div>
