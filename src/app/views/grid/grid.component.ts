@@ -1,20 +1,27 @@
-import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { GridModelService } from '../../models/grid-model.service';
+import { isNumber } from 'util';
 
 @Component({
-  selector: 'app-grid',
+  selector: 'grid-component',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
 
-export class GridComponent implements OnInit {
-
+export class GridComponent implements AfterViewInit {
+  @ViewChild('addToken') addTokenElement: ElementRef;
+  @ViewChild('gridElement') gridElement: ElementRef;
   private gridSize = {};
   private rows = [];
   private columns = [];
   private grid = [];
   private alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   private originNode;
+  private newToken = {
+    color: 'blue',
+    hp: null,
+    name: null
+  };
 
   constructor(private gridModel: GridModelService) {
       this.gridModel.gridSize.subscribe(data => this.gridSize=data);
@@ -34,43 +41,76 @@ export class GridComponent implements OnInit {
         columns.forEach(function(column) {
             grid[column + row] = {
               active: false,
-              color: 'blank'
+              color: 'blank',
+              name: null,
+              hp: null
             };
         });
       });
    }
 
-  ngOnInit() {
+  ngAfterViewInit() {
   }
 
 
   moveToken(e: any) {
-    let targetNode = e.nativeEvent.target;
-    let originNode = this.originNode;
-    if (!this.grid[targetNode.id].active) {
-      targetNode.classList.add(this.grid[originNode.id].color);
-      originNode.classList.remove(this.grid[originNode.id].color);
-      this.grid[originNode.id].color = 'blank';
-      this.grid[originNode.id].active = false;
-      this.grid[targetNode.id].color = 'blue';
-      this.grid[targetNode.id].active = true;
+    let targetNode = this.grid[e.nativeEvent.target.id];
+    let originNode = this.grid[this.originNode.id];
+    if (!targetNode.active) {
+      targetNode.color = originNode.color;
+      targetNode.active = true;
+      targetNode.name = originNode.name;
+      targetNode.hp = originNode.hp;
+      originNode.color = 'blank';
+      originNode.active = false;
+      originNode.name = null;
+      originNode.hp = null;
     }
   }
+
+  isSelectedColor(color) {
+    if (this.newToken.color === color) return 'option selected';
+    return 'option';
+  } 
 
   storeOrigin(e: any) {
     this.originNode = e.target;
   }
 
-  addToken(e: any) {
+  addTokenToGrid() {
+      var originNode = this.originNode;
+      var grid = this.grid;
+      if (grid[originNode.id].active) return false;
+        grid[originNode.id].color = this.newToken.color;
+        grid[originNode.id].active = true;
+        grid[originNode.id].name = this.newToken.name;
+        grid[originNode.id].hp = this.newToken.hp;
 
-      if (!this.grid[e.target.id].active) {
-        this.grid[e.target.id].color = 'blue';
-        this.grid[e.target.id].active = true;
-        e.target.classList.add(this.grid[e.target.id].color);
-      } else if (this.grid[e.target.id].active) {
-        e.target.classList.remove(this.grid[e.target.id].color);
-        this.grid[e.target.id].color = 'blank';
-        this.grid[e.target.id].active = false;
-      }
+      this.addTokenElement.nativeElement.classList.remove('visible');
+  }
+
+  setColor(color) {
+    this.newToken.color = color;
+  }
+
+  hideNewToken() {
+    this.addTokenElement.nativeElement.classList.remove('visible');
+  }
+
+  createToken(e: any) {
+    this.originNode = e.target;
+    this.addTokenElement.nativeElement.classList.add('visible');
+  }
+
+  onRightClick(id) {
+    let node = this.grid[id];
+    node.name = null;
+    node.hp = null;
+    node.color = 'blank';
+    return false
+  }
+
+  tokenColor(id) {
+    return 'token ' + this.grid[id].color;  
   }
 }

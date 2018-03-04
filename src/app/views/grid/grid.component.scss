@@ -10,7 +10,10 @@ body {
     display: flex;
     align-content: center;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    z-index: 1;    
 }
 
 table {
@@ -41,8 +44,21 @@ td {
     margin: 10%;
     border-radius: 80px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px #000000;
+    flex-direction: column;
 }
 
+.name {
+    font-size: 15px;
+}
+
+.hp {
+    font-size: 12px;
+}
 
 img {
     position: absolute;
@@ -85,4 +101,74 @@ img {
 
 .orange {
     background-color: orange;
+}
+
+.white {
+    background-color: white;
+}
+
+.black {
+    background-color: black;
+}
+
+.add-token {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background-color: wheat;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    flex-direction: column;
+}
+
+.visible {
+    display: flex !important;
+}
+
+.option {
+    height: 50px;
+    width: 180px;
+    background-color: silver;
+    border-color: black;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: cadetblue;
+}
+
+.selected {
+    background-color: cornflowerblue !important;
+}
+
+.color {
+    height: 15px;
+    width: 30px;
+    border: 1px solid  black;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#colors {
+     margin-top: 15px;
+}
+
+.create-btn {
+    margin-top: 15px;
+    height: 50px;
+    width: 150px;
+    background-color: crimson;
+    color: wheat;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 20px;
+    cursor: pointer;
 }

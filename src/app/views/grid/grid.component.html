@@ -1,5 +1,5 @@
-<div class="container">
-  <table>
+<div class="container" oncontextmenu="return false">
+  <table #gridElement>
     <tr>
       <td class="info"></td>
       <td class="info" *ngFor="let column of columns">
@@ -11,9 +11,68 @@
         {{ row }}
       </td>
       <td *ngFor="let column of columns" droppable (onDrop)="moveToken($event)">
-        <div draggable (onDragStart)="storeOrigin($event)"  [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="addToken($event)" class="token">
+        <div draggable (onDragStart)="storeOrigin($event)"  [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="createToken($event)" [ngClass]="tokenColor(column + row)" (contextmenu)="onRightClick(column + row)">
+          <span class="name" id="{{ column + row }}">
+            {{ grid[column + row].name }}
+          </span>
+          <span class="hp" id="{{ column + row }}">
+            <strong>  
+              {{ grid[column + row].hp }}
+              </strong>    
+          </span>
         </div>
       </td>
     </tr>
   </table>
+</div>
+<div class="add-token" (dblclick)="hideNewToken()" #addToken>
+  <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"  [(ngModel)]="newToken.name">
+      <label for="hp">Hit Points:</label>
+      <input type="text" id="hp" name="hp"  [(ngModel)]="newToken.hp">
+    </form>  
+  <div id="colors">
+    <div (click)="setColor('brown')" [ngClass]="isSelectedColor('brown')">
+      <div class="color brown"></div>
+      <span><strong>Brown</strong></span>
+    </div>
+    <div (click)="setColor('red')" [ngClass]="isSelectedColor('red')">
+      <div class="color red"></div>
+      <span><strong>Blue</strong></span>
+    </div>
+    <div (click)="setColor('blue')" [ngClass]="isSelectedColor('blue')">
+      <div class="color blue"></div>
+      <span><strong>Red</strong></span>
+    </div>
+    <div (click)="setColor('green')" [ngClass]="isSelectedColor('green')">
+      <div class="color green"></div>
+      <span><strong>Green</strong></span>
+    </div>
+    <div (click)="setColor('green-yellow')" [ngClass]="isSelectedColor('green-yellow')">
+      <div class="color green-yellow"></div>
+      <span><strong>Green Yellow</strong></span>
+    </div>
+    <div (click)="setColor('pink')" [ngClass]="isSelectedColor('pink')">
+      <div class="color pink"></div>
+      <span><strong>Pink</strong></span>
+    </div>
+    <div (click)="setColor('white')" [ngClass]="isSelectedColor('white')">
+      <div class="color white"></div>
+      <span><strong>White</strong></span>
+    </div>
+    <div (click)="setColor('black')" [ngClass]="isSelectedColor('black')">
+      <div class="color black"></div>
+      <span><strong>Black</strong></span>
+    </div>
+    <div (click)="setColor('yellow')" [ngClass]="isSelectedColor('yellow')">
+      <div class="color yellow"></div>
+      <span><strong>Yellow</strong></span>
+    </div>
+    <div (click)="setColor('purple')" [ngClass]="isSelectedColor('purple')">
+      <div class="color purple"></div>
+      <span><strong>Purple</strong></span>
+    </div>
+  </div>
+  <div class="create-btn" (click)="addTokenToGrid()">Create token</div>
 </div>
