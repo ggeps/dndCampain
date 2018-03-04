@@ -10,7 +10,7 @@
       <td class="info"> 
         {{ row }}
       </td>
-      <td *ngFor="let column of columns" droppable (onDrop)="moveToken($event)">
+      <td *ngFor="let column of columns" droppable (onDrop)="moveToken($event)" [attr.colspan]="grid[column + row].size" [attr.rowspan]="grid[column + row].size">
         <div draggable (onDragStart)="storeOrigin($event)"  [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="createToken($event)" [ngClass]="tokenColor(column + row)" (contextmenu)="onRightClick(column + row)">
           <span class="name" id="{{ column + row }}">
             {{ grid[column + row].name }}
@@ -31,6 +31,13 @@
       <input type="text" id="name" name="name"  [(ngModel)]="newToken.name">
       <label for="hp">Hit Points:</label>
       <input type="text" id="hp" name="hp"  [(ngModel)]="newToken.hp">
+      <label for="size">Size:</label>
+      <select [(ngModel)]="newToken.size" id="">
+        <option value="1">Small to Medium</option>
+        <option value="2">Large</option>
+        <option value="3">Huge</option>
+        <option value="4">Gigantic</option>
+      </select>
     </form>  
   <div id="colors">
     <div (click)="setColor('brown')" [ngClass]="isSelectedColor('brown')">

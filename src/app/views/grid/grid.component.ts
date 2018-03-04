@@ -20,7 +20,8 @@ export class GridComponent implements AfterViewInit {
   private newToken = {
     color: 'blue',
     hp: null,
-    name: null
+    name: null,
+    size: 3
   };
 
   constructor(private gridModel: GridModelService) {
@@ -61,10 +62,12 @@ export class GridComponent implements AfterViewInit {
       targetNode.active = true;
       targetNode.name = originNode.name;
       targetNode.hp = originNode.hp;
+      targetNode.size = originNode.size;
       originNode.color = 'blank';
       originNode.active = false;
       originNode.name = null;
       originNode.hp = null;
+      originNode.size = 1;
     }
   }
 
@@ -78,13 +81,13 @@ export class GridComponent implements AfterViewInit {
   }
 
   addTokenToGrid() {
-      var originNode = this.originNode;
-      var grid = this.grid;
-      if (grid[originNode.id].active) return false;
-        grid[originNode.id].color = this.newToken.color;
-        grid[originNode.id].active = true;
-        grid[originNode.id].name = this.newToken.name;
-        grid[originNode.id].hp = this.newToken.hp;
+      var originNode = this.grid[this.originNode.id];
+      if (originNode.active) return false;
+        originNode.color = this.newToken.color;
+        originNode.active = true;
+        originNode.name = this.newToken.name;
+        originNode.hp = this.newToken.hp;
+        originNode.size = this.newToken.size;
 
       this.addTokenElement.nativeElement.classList.remove('visible');
   }
@@ -107,6 +110,7 @@ export class GridComponent implements AfterViewInit {
     node.name = null;
     node.hp = null;
     node.color = 'blank';
+    node.size = 1;
     return false
   }
 
