@@ -11,48 +11,62 @@ import { isNumber } from 'util';
 export class GridComponent implements AfterViewInit {
   @ViewChild('addToken') addTokenElement: ElementRef;
   @ViewChild('gridElement') gridElement: ElementRef;
+  @ViewChild('hitPointsModal') hitPointsModal: ElementRef;
+  
   private gridSize = {};
   private rows = [];
   private columns = [];
   private grid = [];
-  private alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  private alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ'];
   private originNode;
+  private hpModifier = {
+    hp: 0,
+    top: 0,
+    left: 0
+  };
   private newToken = {
     color: 'blue',
     hp: null,
     name: null,
-    size: null
+    size: 1
   };
 
   constructor(private gridModel: GridModelService) {
-      this.gridModel.gridSize.subscribe(data => this.gridSize=data);
-      this.rows = Array(this.gridSize['height'])
-        .fill(null, 0,this.gridSize['height'])
-        .map((x,i)=>i+1);
-      
-      for (let i = 0; i < this.gridSize['width']; i++) {
-        this.columns.push(this.alphabet[i]);
-      }
-
-      var rows = this.rows;
-      var columns = this.columns;
-      var grid = this.grid;
-
-      rows.forEach(function(row) {
-        columns.forEach(function(column) {
-            grid[column + row] = {
-              active: false,
-              color: 'blank',
-              name: null,
-              hp: null
-            };
-        });
+      var createGrid = this.createGrid;
+      this.gridModel.gridSize.subscribe(function(data) {
+        createGrid(data);
       });
    }
 
   ngAfterViewInit() {
   }
 
+  public createGrid = (size: any) => {
+    this.rows = []  , this.columns = [];
+   
+      for(let r = 0; r < size.height; r++) {
+        this.rows.push(r + 1);
+      }
+      
+      for (let i = 0; i < size.width; i++) {
+        this.columns.push(this.alphabet[i]);
+      }
+
+      var rows = this.rows;
+      var columns = this.columns;
+      var grid = this.grid;
+      rows.forEach(function(row) {
+        columns.forEach(function(column) {
+            grid[column + row] = {
+              active: false,
+              color: 'blank',
+              name: null,
+              hp: null,
+              size: 1
+            };
+        });
+      });
+  }
 
   moveToken(e: any) {
     let targetNode = this.grid[e.nativeEvent.target.id];
@@ -117,5 +131,21 @@ export class GridComponent implements AfterViewInit {
 
   tokenColor(id) {
     return 'token ' + this.grid[id].color;  
+  }
+
+  modifyHitPoints(e: any) {
+    if (!this.grid[e.target.id].active) return false;
+    this.originNode = e.target;
+    this.hpModifier.left = e.clientX;
+    this.hpModifier.top = e.clientY;
+    this.hpModifier.hp = 0;
+    this.hitPointsModal.nativeElement.classList.add('visible');
+  }
+
+  alterHP() {
+    this
+      .grid[this.originNode.id]
+      .hp += this.hpModifier.hp;
+    this.hitPointsModal.nativeElement.classList.remove('visible');
   }
 }

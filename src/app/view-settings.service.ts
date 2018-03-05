@@ -14,17 +14,15 @@ export class ViewSettingsService {
   public settings = new BehaviorSubject<any>({
     background: 'default',
     music: 'adventure',
-    characters: []
+    characters: [],
+    grid: false,
+    gridHeight: 8,
+    gridWidth: 15
   });
   constructor(private socket: Socket) {
   }
 
-  changeSettings(backgroud: string = 'default', music: string = 'adventure', characters = []) {
-    let newSettings: settingsType = {
-      background: backgroud,
-      music: music,
-      characters: characters
-    }
+  changeSettings(newSettings) {
     this.socket.emit('newSettings', newSettings);
   }
 

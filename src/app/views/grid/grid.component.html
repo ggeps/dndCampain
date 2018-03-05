@@ -11,7 +11,7 @@
         {{ row }}
       </td>
       <td *ngFor="let column of columns" droppable (onDrop)="moveToken($event)" [attr.colspan]="grid[column + row].size" [attr.rowspan]="grid[column + row].size">
-        <div draggable (onDragStart)="storeOrigin($event)"  [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="createToken($event)" [ngClass]="tokenColor(column + row)" (contextmenu)="removeToken(column + row)">
+        <div draggable (onDragStart)="storeOrigin($event)"  [dragData]="{name: column + row}" id="{{ column + row }}" (dblclick)="createToken($event)" [ngClass]="tokenColor(column + row)" (contextmenu)="removeToken(column + row)" (click)="modifyHitPoints($event)">
           <span class="name" id="{{ column + row }}">
             {{ grid[column + row].name }}
           </span>
@@ -30,7 +30,7 @@
       <label for="name">Name:</label>
       <input type="text" id="name" name="name"  [(ngModel)]="newToken.name">
       <label for="hp">Hit Points:</label>
-      <input type="text" id="hp" name="hp"  [(ngModel)]="newToken.hp">
+      <input type="number" id="hp" name="hp"  required [(ngModel)]="newToken.hp">
       <label for="size">Size:</label>
       <select [(ngModel)]="newToken.size" id="size" name="size">
         <option value="1">Small to Medium</option>
@@ -83,4 +83,8 @@
     </div>
   </div>
   <div class="create-btn" (click)="addTokenToGrid()">Create token</div>
+</div>
+<div id="hitPointsModal" #hitPointsModal [style.top.px]="hpModifier.top - 10" [style.left.px]="hpModifier.left">
+  <input type="number" id="hpModifier" name="hpModifier" [(ngModel)]="hpModifier.hp">
+  <img src="assets/done-min.jpg" alt="" (click)="alterHP()">
 </div>

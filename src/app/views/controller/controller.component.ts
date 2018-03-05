@@ -36,12 +36,22 @@ export class ControllerComponent implements OnInit {
       music: '',
       characters: [],
       cleanBackground: '',
-      cleanMusic: ''
+      cleanMusic: '',
+      grid: false,
+      gridHeight: 8,
+      gridWidth: 15
     };
   }
 
   changeSettings() {
-    this.viewSettings.changeSettings(this.settings.background, this.settings.music, this.settings.characters);
+    this.viewSettings.changeSettings({
+      background: this.settings.background, 
+      music: this.settings.music, 
+      character: this.settings.characters,
+      grid: this.settings.grid,
+      gridHeight: this.settings.gridHeight,
+      gridWidth: this.settings.gridWidth
+    });
     //this.resetSettings();
   }
 

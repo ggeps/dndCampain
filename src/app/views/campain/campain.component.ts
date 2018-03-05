@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewSettingsService } from '../../view-settings.service';
 import { environment } from '../../../environments/environment';
+import { GridModelService } from '../../models/grid-model.service';
 @Component({
   selector: 'app-campain',
   templateUrl: './campain.component.html',
@@ -13,12 +14,23 @@ export class CampainComponent implements OnInit {
   imagesUrl: string = environment.apiUrl + 'character/picture/';
   settings;
 
-  constructor(private viewSettings: ViewSettingsService) { 
-    this.viewSettings.getSettings().subscribe(res => this.settings = res);
+  constructor(private viewSettings: ViewSettingsService, private gridModel: GridModelService) { 
+    this.settings = {
+      grid: false,
+    };
+    let settings = this.setSetting;
+    this.viewSettings.getSettings().subscribe(function(data) {
+      settings(data);
+    });
   }
 
   ngOnInit() {
-    this.settings.characters = [];
+    this.settings.character = [];
+  }
+
+   public setSetting = (settings) => {
+    this.settings = settings;
+    this.gridModel.changeGridSize(settings.gridHeight, settings.gridWidth);
   }
 
   audioEnded() {

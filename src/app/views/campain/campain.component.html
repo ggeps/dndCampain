@@ -3,4 +3,4 @@
 <div class="characters">
     <img [src]="imagesUrl + character.name" alt="" class="character" *ngFor="let character of settings.characters">
 </div>    
-<grid-component></grid-component>
+<grid-component [hidden]="!settings.grid"></grid-component>

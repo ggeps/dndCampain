@@ -20,6 +20,11 @@
     </li>
     <li>
         <button>Add Character</button>
+        <input type="checkbox" name="grid" id="grid" [(ngModel)]="settings.grid"> Grid
+        <label for="gridHeight" [hidden]="!settings.grid">Height</label>
+        <input type="text" name="gridHeight" id="gridHeight" [hidden]="!settings.grid" [(ngModel)]="settings.gridHeight">
+        <label for="gridWidth" [hidden]="!settings.grid">Width</label>
+        <input type="text" name="gridWidth" id="gridWidth" [hidden]="!settings.grid" [(ngModel)]="settings.gridWidth">
     </li>
 </ul>
 <div class="list-of-characters">
