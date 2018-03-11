@@ -12,25 +12,23 @@ export class CampainComponent implements OnInit {
   backgroundUrl: string = environment.apiUrl + 'background/';
   musicUrl: string = environment.apiUrl + 'music/';
   imagesUrl: string = environment.apiUrl + 'character/picture/';
-  settings;
+  settings:any = {};
 
   constructor(private viewSettings: ViewSettingsService, private gridModel: GridModelService) { 
-    this.settings = {
-      grid: false,
-    };
-    let settings = this.setSetting;
+    this.viewSettings.getSettings().subscribe(res => this.settings = res);
+    /*let settings = this.setSetting;
     this.viewSettings.getSettings().subscribe(function(data) {
       settings(data);
-    });
+    });*/
   }
 
   ngOnInit() {
     this.settings.character = [];
   }
 
-   public setSetting = (settings) => {
-    this.settings = settings;
-    this.gridModel.changeGridSize(settings.gridHeight, settings.gridWidth);
+   public setSetting = (newSettings) => {
+    this.settings = newSettings;
+    this.gridModel.changeGridSize(newSettings.gridHeight, newSettings.gridWidth);
   }
 
   audioEnded() {

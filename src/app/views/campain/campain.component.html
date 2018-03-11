@@ -1,6 +1,6 @@
-<img class="background-image" [src]="backgroundUrl + settings.background">
+ <img class="background-image" [src]="backgroundUrl + settings.background">
 <video [src]="musicUrl + settings.music" autoplay (ended)="audioEnded()"></video>
 <div class="characters">
-    <img [src]="imagesUrl + character.name" alt="" class="character" *ngFor="let character of settings.characters">
+    <img [src]="imagesUrl + character.name" alt="" class="character" *ngFor="let character of settings.character">
 </div>    
 <grid-component [hidden]="!settings.grid"></grid-component>
