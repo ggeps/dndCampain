@@ -15,11 +15,11 @@ export class CampainComponent implements OnInit {
   settings:any = {};
 
   constructor(private viewSettings: ViewSettingsService, private gridModel: GridModelService) { 
-    this.viewSettings.getSettings().subscribe(res => this.settings = res);
-    /*let settings = this.setSetting;
+    //this.viewSettings.getSettings().subscribe(res => this.settings = res);
+    let settings = this.setSetting;
     this.viewSettings.getSettings().subscribe(function(data) {
       settings(data);
-    });*/
+    });
   }
 
   ngOnInit() {
